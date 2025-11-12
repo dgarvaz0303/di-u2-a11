@@ -32,6 +32,28 @@ export default function ShoppingCart() {
       }
     }))
   }
+  function handleDecreseClick(productId) {
+    if(products[productId].count==1){
+      setProducts(
+                products.filter(product =>
+                  product.id !== productId
+                )
+              )
+    }else{
+      setProducts(products.map(product => {
+      
+      if (product.id === productId) {
+        return {
+          ...product,
+          count: product.count - 1
+        };
+      } else {
+        return product;
+      }
+    }))
+    }
+    
+  }
 
   return (
     <ul>
@@ -45,7 +67,9 @@ export default function ShoppingCart() {
           }}>
             +
           </button>
-          <button>
+          <button onClick={() => {
+            handleDecreseClick(product.id);
+          }}>
             –
           </button>
         </li>
