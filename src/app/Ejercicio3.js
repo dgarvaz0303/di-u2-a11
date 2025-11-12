@@ -15,11 +15,15 @@ export default function TaskApp() {
   );
 
   function handleAddTodo(title) {
-    todos.push({
-      id: nextId++,
-      title: title,
-      done: false
-    });
+    setTodos(
+      todos.map(product=>{
+        <li key={product.id}>
+          {product.title}
+          {' '}
+          
+        </li>
+      })
+    )
   }
 
   function handleChangeTodo(nextTodo) {
