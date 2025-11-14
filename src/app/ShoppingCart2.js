@@ -33,27 +33,21 @@ export default function ShoppingCart() {
     }))
   }
   function handleDecreseClick(productId) {
-    if(products[productId].count==1){
-      setProducts(
-                products.filter(product =>
-                  product.id !== productId
-                )
-              )
-    }else{
-      setProducts(products.map(product => {
-      
-      if (product.id === productId) {
-        return {
-          ...product,
-          count: product.count - 1
-        };
-      } else {
+    const product = products.find(p => p.id === productId);
+      const nuevaListaProducts=products.map(product => {
+      if (product.id === productId && product.count > 1) {
+        let productNuevo={...product, count:product.id-1}
+        return productNuevo;
+      }
+      else {
         return product;
       }
-    }))
+    })
+    const listaFinal=nuevaListaProducts.filter(product=>product.count>0)
+    setProducts(listaFinal)
     }
     
-  }
+  
 
   return (
     <ul>

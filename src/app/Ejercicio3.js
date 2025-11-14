@@ -15,30 +15,30 @@ export default function TaskApp() {
   );
 
   function handleAddTodo(title) {
-    setTodos(
-      todos.map(product=>{
-        <li key={product.id}>
-          {product.title}
-          {' '}
-          
-        </li>
-      })
-    )
+    const newTodos=[...todos,{
+      id: nextId++,
+      title:title,
+      done:false
+    }]
+    setTodos(newTodos)
+    
   }
 
   function handleChangeTodo(nextTodo) {
-    const todo = todos.find(t =>
-      t.id === nextTodo.id
-    );
-    todo.title = nextTodo.title;
-    todo.done = nextTodo.done;
+    const newTodos = todos.map(todo =>
+    {
+      if(todo.id === nextTodo.id){
+        return{...todo,title:nextTodo.title,done:nextTodo.done}
+      }else{
+        return todo
+      }
+    })
+    setTodos(newTodos)
   }
 
   function handleDeleteTodo(todoId) {
-    const index = todos.findIndex(t =>
-      t.id === todoId
-    );
-    todos.splice(index, 1);
+    const newTodos=todos.filter(todo=>todo.id!==todoId)
+    setTodos(newTodos)
   }
 
   return (
